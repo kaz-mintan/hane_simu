@@ -33,7 +33,7 @@ if __name__ == '__main__':
     z=np.zeros(loop_val)
     for i in range(loop_val):
         z[i]=z_depth
-        z_depth = hand_simu.simu_z(zlimit_max,zlimit_min)
+        z_depth = hand_simu.get_ir()
     plt.plot(z)
     plt.show()
     print("end")
