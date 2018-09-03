@@ -1,3 +1,6 @@
+import numpy as np
+from neural_network import *
+
 class Motion_gen:
     #define
     gamma = 0.9
