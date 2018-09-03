@@ -2,9 +2,6 @@
 # http://neuro-educator.com/rl1/
 
 import numpy as np
-import sys
-
-from neural_network import *
 
 import time
 from datetime import datetime
@@ -13,11 +10,7 @@ from datetime import datetime
 from dummy_modules import dummy_evaluator
 from dummy_modules import hand_motion
 
-from datetime import datetime
-
 from motion_gen import *
-
-#from action_convert import *
 
 #define for test
 episode_num=50
