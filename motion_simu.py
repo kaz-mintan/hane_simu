@@ -34,6 +34,7 @@ for episode in range(episode_num-1):  #repeat for number of trials
     # simulation mode
     dummy_state=hand.get_ir()
     motion_frame.set_state(dummy_state,episode)#TODO
+    #print("dummystate", motion_frame.state_mean)
     #seq2feature(state_mean[:,episode], state, ir_no,type_face)
 
     #save data of state_mean
