@@ -45,7 +45,7 @@ class Motion_gen:
         self.state_mean[:,episode]=state_data
 
     def gen_action(self,episode):
-        self.random[episode], self.action[:,episode], self.next_q = self.Q_func.test_gen_action(self.possible_a, self.state_mean, episode, self.random_rate)
+        self.random[episode], self.action[:,episode], self.next_q = self.Q_func.test_gen_action(self.possible_a, self.state_mean, episode, self.random_rate, self.action.shape[0])
 
     def set_reward(self,calced_reward):
         self.reward[episode+1]=calced_reward

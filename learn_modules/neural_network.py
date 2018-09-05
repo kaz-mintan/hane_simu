@@ -86,29 +86,33 @@ class Neural:
 
         return (C, Y)
 
-    def test_gen_action(self, possible_a, state_mean, episode,random_rate):
+    def test_gen_action(self, possible_a, state_mean, episode,random_rate,dim_num):
         p_array= numpy.zeros((self.input_size,1)) #to stock predicted argument
-        #possible_q = numpy.zeros((100,100,100))
-        possible_q = numpy.zeros((possible_a.shape[0],
-            possible_a.shape[0],possible_a.shape[0]))
+        reps=possible_a.shape[0]
+
+        possible_q = np.zeros(([reps for i in range(dim_num)]))
 
         ret_random = 0
-        ret_action = numpy.array([0,0,0])
+        ret_action = np.zeros(dim_num)
         next_q = 0
-        dim_num = 3
         val = float(possible_a.shape[0])
         if episode != 0:
             for a,b,c in itertools.product(range(possible_a.shape[0]),repeat=dim_num):
                 array = numpy.hstack((possible_a[a],possible_a[b],possible_a[c]))
+                print("check/neural",array)
+                #TODO
 
                 p_array[:,0]=numpy.hstack((state_mean[:,episode+1],array))
                 C, possible_q[a,b,c]=self.predict(p_array.T)
+                #TODO
 
             if random_rate <= numpy.random.uniform(0, 1):
                 ret_random=1#maximize
                 action_a,action_b,action_c=argmax_ndim(possible_q)
+                #TODO
                 #ret_action = numpy.array([action_a/100.0,action_b/100.0,action_c/100.0])
                 ret_action = numpy.array([action_a/val,action_b/val,action_c/val])
+                #TODO
 
                 next_q=numpy.max(possible_q)
             else:
@@ -136,6 +140,8 @@ class Neural:
         with open('action_row.csv', 'a') as act_handle:
             numpy.savetxt(act_handle,tmp_log(numpy.hstack((np.array([episode]),ret_action)),datetime.now()),fmt="%.5f",delimiter=",",newline="\n")
 
+        print("test", np.array([episode]),p_array.T)
+        print("testshow", numpy.hstack((np.array([episode]),p_array.T)))
         with open('p_array_gen.csv', 'a') as act_handle:
             numpy.savetxt(act_handle,tmp_log(numpy.hstack((np.array([episode]),p_array.T)),datetime.now()),fmt="%.5f",delimiter=",",newline="\n")
 
